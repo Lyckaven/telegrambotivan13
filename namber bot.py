@@ -1,8 +1,8 @@
 import random
 
 from aiogram import Bot, Dispatcher
-from aiogram.types import Message
-from aiogram.filters import Text, Command
+from aiogram.filters import Command, Text, CommandStart
+from aiogram.types import (KeyboardButton, Message, ReplyKeyboardMarkup)
 
 
 # Вместо BOT TOKEN HERE нужно вставить токен вашего бота,
@@ -13,6 +13,14 @@ BOT_TOKEN: str = '6209915591:AAFSmfW1yRU9zjFV9eZU0y0RtGw2NzuEzlU'
 bot: Bot = Bot(BOT_TOKEN)
 dp: Dispatcher = Dispatcher()
 
+button_1: KeyboardButton = KeyboardButton(text='давай')
+button_2: KeyboardButton = KeyboardButton(text='//')
+
+# Создаем объект клавиатуры, добавляя в него кнопки
+keyboard: ReplyKeyboardMarkup = ReplyKeyboardMarkup(
+                                    keyboard=[[button_1, button_2]],
+                                    resize_keyboard=True)
+
 # Количество попыток, доступных пользователю в игре
 ATTEMPTS: int = 5
 
@@ -22,7 +30,6 @@ user: dict = {'in_game': False,
               'attempts': None,
               'total_games': 0,
               'wins': 0}
-
 
 # Функция возвращающая случайное целое число от 1 до 100
 def get_random_number() -> int:
@@ -54,10 +61,6 @@ async def process_stat_command(message: Message):
                          f'Игр выиграно: {user["wins"]}')
 
 
-
-@dp.message(Command(commands=['joke']))
-async def process_joke_command(message: Message):
-    await message.answer(f'reee')
 
 
 # Этот хэндлер будет срабатывать на команду "/cancel"
