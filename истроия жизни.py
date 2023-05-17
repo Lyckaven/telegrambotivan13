@@ -5,7 +5,7 @@ from aiogram.types import (KeyboardButton, Message, ReplyKeyboardMarkup,
 
 # Вместо BOT TOKEN HERpip freeze > requirements.txtE нужно вставить токен вашего бота,
 # полученный у @BotFather
-API_TOKEN: str = 'BOT TOKEN HERE'
+API_TOKEN: str = ''
 
 # Создаем объекты бота и диспетчера
 bot: Bot = Bot(token=API_TOKEN)
